@@ -17,6 +17,7 @@ class Grafo
     public void adcAresta(int v, int w)
     {
         adjList[v].Add(w);
+        Console.WriteLine("Adicionando aresta de " + v + " para " + w);
     }
 
     private void BEPU(int v, bool[] visitados)
@@ -27,13 +28,17 @@ class Grafo
         foreach (int vizinho in adjList[v])
         {
             if (!visitados[vizinho])
+            {
+                Console.WriteLine("Visitando vizinho " + vizinho + " do vertice " + v);
                 BEPU(vizinho, visitados);
+            }
         }
     }
 
     public void BEP(int VerticeInicio)
     {
         bool[] visitados = new bool[vertices];
+        Console.WriteLine("Iniciando busca em profundidade a partir do vertice " + VerticeInicio);
         BEPU(VerticeInicio, visitados);
     }
 }

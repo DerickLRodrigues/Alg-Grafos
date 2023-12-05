@@ -17,6 +17,7 @@ class Grafo
     public void adcAresta(int v, int w)
     {
         adj[v].Add(w);
+        Console.WriteLine("Adicionando aresta de " + v + " para " + w);
     }
 }
 
@@ -46,6 +47,7 @@ class PriPesquisa
                     visitado[vizinho] = true;
                     pai[vizinho] = vertice;
                     fila.Enqueue(vizinho);
+                    Console.WriteLine("Visitando vizinho " + vizinho + " do vertice " + vertice);
                 }
             }
         }
