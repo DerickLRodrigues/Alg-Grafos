@@ -3,73 +3,81 @@ using System.Collections.Generic;
 
 class Grafo
 {
-    public int V; // numero de vertices
-    public List<int>[] adj; // listas de adjacencias
+    private int numVertices;
+    private List<int>[] adjacencias;
 
     public Grafo(int v)
     {
-        V = v;
-        adj = new List<int>[V];
-        for (int i = 0; i < V; ++i)
-            adj[i] = new List<int>();
+        numVertices = v;
+        adjacencias = new List<int>[v];
+        for (int i = 0; i < v; ++i)
+        {
+            adjacencias[i] = new List<int>();
+        }
     }
 
     public void adcAresta(int v, int w)
     {
-        adj[v].Add(w);
-    }
-}
-
-class PriPesquisa
-{
-    private bool[] visitado;
-    private int[] pai;
-    private List<int> ordemFinal;
-
-    public PriPesquisa()
-    {
-        ordemFinal = new List<int>();
+        adjacencias[v].Add(w);
+        adjacencias[w].Add(v);
     }
 
-    public void BEL(Grafo graf, int raiz)
+    public void ColorirGrafo()
     {
-        visitado = new bool[graf.V];
-        pai = new int[graf.V];
+        int[] cores = new int[numVertices];
+        bool[] disponivel = new bool[numVertices];
 
-        Queue<int> fila = new Queue<int>();
-        visitado[raiz] = true;
-        fila.Enqueue(raiz);
-
-        Console.WriteLine("Iniciando busca em largura (BEL) a partir do vértice " + raiz);
-
-        while (fila.Count != 0)
+        for (int i = 0; i < numVertices; i++)
         {
-            int vertice = fila.Dequeue();
-            Console.Write("Visitando vértice: " + vertice + " ");
+            cores[i] = -1;
+            disponivel[i] = true;
+        }
 
-            foreach (int vizinho in graf.adj[vertice])
+        cores[0] = 0;
+
+        for (int u = 1; u < numVertices; u++)
+        {
+            Console.WriteLine($"Verificando vértice {u}");
+
+            foreach (var v in adjacencias[u])
             {
-                if (!visitado[vizinho])
+                if (cores[v] != -1)
                 {
-                    visitado[vizinho] = true;
-                    pai[vizinho] = vertice;
-                    fila.Enqueue(vizinho);
-                    Console.WriteLine("Enfileirando vértice " + vizinho + " (pai: " + vertice + ")");
+                    disponivel[cores[v]] = false;
                 }
             }
 
-            ordemFinal.Add(vertice);
+            int cor;
+            for (cor = 0; cor < numVertices; cor++)
+            {
+                if (disponivel[cor])
+                {
+                    break;
+                }
+            }
+
+            cores[u] = cor;
+
+            for (int i = 0; i < numVertices; i++)
+            {
+                disponivel[i] = true;
+            }
+
+            Console.WriteLine($"Atribuindo cor {cor} ao vértice {u}");
         }
 
-        Console.WriteLine("\nOrdem final da busca em largura:");
-        foreach (var vertice in ordemFinal)
+        Console.WriteLine("\nAtribuição final de cores dos vértices:");
+        for (int i = 0; i < numVertices; i++)
         {
-            Console.Write(vertice + " ");
+            Console.WriteLine($"Vértice {i}: Cor {cores[i]}");
         }
     }
+
+  
 }
 
-class Program {
+class Program
+{
 
   public static void preencherEsparso(Grafo graf){
     graf.adcAresta(0, 1);
@@ -142,12 +150,11 @@ class Program {
 
   }
   
-  public static void Main (string[] args) {
-    Grafo graf = new Grafo(10); //qtd vertice
-    preencherEsparso(graf);
-
-    PriPesquisa bfs = new PriPesquisa();
-    Console.WriteLine("BEL resultado:");
-    bfs.BEL(graf, 0);   // numero de raiz de inicio
-  }
+    static void Main()
+    {
+        Grafo graf = new Grafo(10);
+         preencherEsparso(graf);
+        graf.ColorirGrafo();
+      
+    }
 }
