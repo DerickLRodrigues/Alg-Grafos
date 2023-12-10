@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 class Grafo
@@ -225,7 +225,7 @@ class Program
     public static void Main(string[] args)
     {
         Grafo graf = new Grafo(10); //qtd vertice
-        preencherEsparso(graf);
+        preencherDenso(graf);
 
         PriPesquisa bep = new PriPesquisa();
         Console.WriteLine("BEP resultado:");

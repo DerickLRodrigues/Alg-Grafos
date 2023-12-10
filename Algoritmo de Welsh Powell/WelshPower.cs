@@ -1,294 +1,171 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-class Grafo
+namespace WelshPower
 {
-    private int numVertices;
-    private List<int>[] adjacencias;
 
-    public Grafo(int v)
+    class Grafo
     {
-        numVertices = v;
-        adjacencias = new List<int>[v];
-        for (int i = 0; i < v; ++i)
+        private int numVertices;
+        private List<int>[] adjacencias;
+
+        public Grafo(int v)
         {
-            adjacencias[i] = new List<int>();
-        }
-    }
-
-    public void adcAresta(int v, int w)
-    {
-        adjacencias[v].Add(w);
-        adjacencias[w].Add(v);
-    }
-
-    public void ColorirGrafo()
-    {
-        int[] cores = new int[numVertices];
-        bool[] disponivel = new bool[numVertices];
-
-        for (int i = 0; i < numVertices; i++)
-        {
-            cores[i] = -1;
-            disponivel[i] = true;
+            numVertices = v;
+            adjacencias = new List<int>[v];
+            for (int i = 0; i < v; ++i)
+            {
+                adjacencias[i] = new List<int>();
+            }
         }
 
-        cores[0] = 0;
-
-        for (int u = 1; u < numVertices; u++)
+        public void adc(int v, int w)
         {
-            Console.WriteLine($"Verificando vértice {u}");
+            adjacencias[v].Add(w);
+            adjacencias[w].Add(v);
+        }
 
-            foreach (var v in adjacencias[u])
-            {
-                if (cores[v] != -1)
-                {
-                    disponivel[cores[v]] = false;
-                }
-            }
-
-            int cor;
-            for (cor = 0; cor < numVertices; cor++)
-            {
-                if (disponivel[cor])
-                {
-                    break;
-                }
-            }
-
-            cores[u] = cor;
+        public void ColorirGrafo()
+        {
+            int[] cores = new int[numVertices];
+            bool[] disponivel = new bool[numVertices];
 
             for (int i = 0; i < numVertices; i++)
             {
+                cores[i] = -1;
                 disponivel[i] = true;
             }
 
-            Console.WriteLine($"Atribuindo cor {cor} ao vértice {u}");
+            cores[0] = 0;
+
+            for (int u = 1; u < numVertices; u++)
+            {
+                Console.WriteLine($"Verificando vértice {u}");
+
+                foreach (var v in adjacencias[u])
+                {
+                    if (cores[v] != -1)
+                    {
+                        disponivel[cores[v]] = false;
+                    }
+                }
+
+                int cor;
+                for (cor = 0; cor < numVertices; cor++)
+                {
+                    if (disponivel[cor])
+                    {
+                        break;
+                    }
+                }
+
+                cores[u] = cor;
+
+                for (int i = 0; i < numVertices; i++)
+                {
+                    disponivel[i] = true;
+                }
+
+                Console.WriteLine($"Atribuindo cor {cor} ao vértice {u}");
+            }
+
+            Console.WriteLine("\nAtribuição final de cores dos vértices:");
+            for (int i = 0; i < numVertices; i++)
+            {
+                Console.WriteLine($"Vértice {i}: Cor {cores[i]}");
+            }
         }
 
-        Console.WriteLine("\nAtribuição final de cores dos vértices:");
-        for (int i = 0; i < numVertices; i++)
+
+    }
+
+    class Program
+    {
+
+        public static void preencherEsparso(Grafo graf)
         {
-            Console.WriteLine($"Vértice {i}: Cor {cores[i]}");
+            graf.adc(0, 1);
+            graf.adc(0, 4);
+            graf.adc(0, 9);
+            graf.adc(0, 8);
+            graf.adc(0, 7);
+            graf.adc(1, 4);
+            graf.adc(1, 9);
+            graf.adc(2, 5);
+            graf.adc(2, 7);
+            graf.adc(2, 8);
+            graf.adc(2, 3);
+            graf.adc(3, 8);
+            graf.adc(3, 4);
+            graf.adc(4, 8);
+            graf.adc(4, 9);
+            graf.adc(9, 5);
+            graf.adc(5, 8);
+            graf.adc(5, 6);
+            graf.adc(5, 7);
+            graf.adc(7, 8);
         }
-    }
 
-  
-}
+        public static void preencherDenso(Grafo graf)
+        {
+            graf.adc(0, 1);
+            graf.adc(0, 2);
+            graf.adc(0, 3);
+            graf.adc(0, 4);
+            graf.adc(0, 5);
+            graf.adc(0, 6);
+            graf.adc(0, 7);
+            graf.adc(0, 8);
+            graf.adc(0, 9);
+            graf.adc(1, 2);
+            graf.adc(1, 3);
+            graf.adc(1, 4);
+            graf.adc(1, 5);
+            graf.adc(1, 6);
+            graf.adc(1, 7);
+            graf.adc(1, 8);
+            graf.adc(1, 9);
+            graf.adc(2, 5);
+            graf.adc(2, 6);
+            graf.adc(2, 8);
+            graf.adc(2, 9);
+            graf.adc(2, 4);
+            graf.adc(2, 3); //23
 
-class Program
-{
+            graf.adc(3, 5);
+            graf.adc(3, 6);
+            graf.adc(3, 7);
+            graf.adc(3, 8);
+            graf.adc(3, 9);
+            graf.adc(3, 4);//29
 
-    public static void preencherEsparso(Grafo graf)
-    {
-        graf.adcAresta(0, 1);
-        graf.adcAresta(0, 4);
-        graf.adcAresta(0, 9);
-        graf.adcAresta(0, 8);
-        graf.adcAresta(1, 9);
-        graf.adcAresta(1, 4);
-        graf.adcAresta(2, 7);
-        graf.adcAresta(2, 5);
-        graf.adcAresta(2, 8);
-        graf.adcAresta(2, 3);
-        graf.adcAresta(3, 2);
-        graf.adcAresta(3, 8);
-        graf.adcAresta(3, 4);
-        graf.adcAresta(4, 8);
-        graf.adcAresta(4, 9);
-        graf.adcAresta(5, 8);
-        graf.adcAresta(5, 7);
-        graf.adcAresta(5, 6);
-        graf.adcAresta(5, 2);
-        graf.adcAresta(6, 5);
-        graf.adcAresta(7, 2);
-        graf.adcAresta(7, 5);
-        graf.adcAresta(7, 8);
-        graf.adcAresta(8, 0);
-        graf.adcAresta(8, 2);
-        graf.adcAresta(8, 3);
-        graf.adcAresta(8, 4);
-        graf.adcAresta(8, 5);
-        graf.adcAresta(9, 0);
-        graf.adcAresta(9, 1);
-        graf.adcAresta(9, 4);
-    }
+            graf.adc(4, 5);
+            graf.adc(4, 6);
+            graf.adc(4, 7);
+            graf.adc(4, 8);
+            graf.adc(4, 9);//34
 
+            graf.adc(5, 9);
+            graf.adc(5, 6);//36
 
-    public static void preencherDenso(Grafo graf)
-    {
-        graf.adcAresta(0, 1);
-        graf.adcAresta(1, 0);
+            graf.adc(6, 9);
+            graf.adc(6, 7);
+            graf.adc(7, 8);
+            graf.adc(8, 9);
 
-        graf.adcAresta(0, 2);
-        graf.adcAresta(2, 0);
+        }
 
-        graf.adcAresta(0, 3);
-        graf.adcAresta(3, 0);
+        static void Main(string[] args)
+        {
 
-        graf.adcAresta(0, 4);
-        graf.adcAresta(4, 0);
+            Grafo graf = new Grafo(10);
+            preencherDenso(graf);
+            graf.ColorirGrafo();
+            Console.ReadLine();
 
-        graf.adcAresta(0, 5);
-        graf.adcAresta(5, 0);
-
-        graf.adcAresta(0, 6);
-        graf.adcAresta(6, 0);
-
-        graf.adcAresta(0, 7);
-        graf.adcAresta(7, 0);
-
-        graf.adcAresta(0, 8);
-        graf.adcAresta(8, 0);
-
-        graf.adcAresta(0, 9);
-        graf.adcAresta(9, 0);
-
-        graf.adcAresta(1, 2);
-        graf.adcAresta(2, 1);
-
-        graf.adcAresta(1, 3);
-        graf.adcAresta(3, 1);
-
-        graf.adcAresta(1, 4);
-        graf.adcAresta(4, 1);
-
-        graf.adcAresta(1, 5);
-        graf.adcAresta(5, 1);
-
-        graf.adcAresta(1, 6);
-        graf.adcAresta(6, 1);
-
-        graf.adcAresta(1, 7);
-        graf.adcAresta(7, 1);
-
-        graf.adcAresta(1, 8);
-        graf.adcAresta(8, 1);
-
-        graf.adcAresta(1, 9);
-        graf.adcAresta(9, 1);
-
-        graf.adcAresta(2, 5);
-        graf.adcAresta(5, 2);
-
-        graf.adcAresta(2, 6);
-        graf.adcAresta(6, 2);
-
-        graf.adcAresta(2, 8);
-        graf.adcAresta(8, 2);
-
-        graf.adcAresta(2, 9);
-        graf.adcAresta(9, 2);
-
-        graf.adcAresta(2, 4);
-        graf.adcAresta(4, 2);
-
-        graf.adcAresta(2, 3);
-        graf.adcAresta(3, 2);
-
-        graf.adcAresta(3, 5);
-        graf.adcAresta(5, 3);
-
-        graf.adcAresta(3, 6);
-        graf.adcAresta(6, 3);
-
-        graf.adcAresta(3, 7);
-        graf.adcAresta(7, 3);
-
-        graf.adcAresta(3, 8);
-        graf.adcAresta(8, 3);
-
-        graf.adcAresta(3, 9);
-        graf.adcAresta(9, 3);
-
-        graf.adcAresta(3, 4);
-        graf.adcAresta(4, 3);
-
-        graf.adcAresta(4, 5);
-        graf.adcAresta(5, 4);
-
-        graf.adcAresta(4, 6);
-        graf.adcAresta(6, 4);
-
-        graf.adcAresta(4, 7);
-        graf.adcAresta(7, 4);
-
-        graf.adcAresta(4, 8);
-        graf.adcAresta(8, 4);
-
-        graf.adcAresta(4, 9);
-        graf.adcAresta(9, 4);
-
-        graf.adcAresta(5, 9);
-        graf.adcAresta(9, 5);
-
-        graf.adcAresta(5, 6);
-        graf.adcAresta(6, 5);
-
-        graf.adcAresta(6, 9);
-        graf.adcAresta(9, 6);
-
-        graf.adcAresta(6, 7);
-        graf.adcAresta(7, 6);
-
-        graf.adcAresta(7, 8);
-        graf.adcAresta(8, 7);
-
-        graf.adcAresta(8, 9);
-        graf.adcAresta(9, 8);
-    }{
-    graf.adcAresta(0, 1);
-    graf.adcAresta(0, 2);
-    graf.adcAresta(0, 3);
-    graf.adcAresta(0, 4);
-    graf.adcAresta(0, 5);
-    graf.adcAresta(0, 6);
-    graf.adcAresta(0, 7);
-    graf.adcAresta(0, 8);
-    graf.adcAresta(0, 9);
-    graf.adcAresta(1, 2);
-    graf.adcAresta(1, 3);
-    graf.adcAresta(1, 4);
-    graf.adcAresta(1, 5);
-    graf.adcAresta(1, 6);
-    graf.adcAresta(1, 7);
-    graf.adcAresta(1, 8);
-    graf.adcAresta(1, 9);
-    graf.adcAresta(2, 5);
-    graf.adcAresta(2, 6);
-    graf.adcAresta(2, 8); 
-    graf.adcAresta(2, 9);
-    graf.adcAresta(2, 4);
-    graf.adcAresta(2, 3); //23
-
-    graf.adcAresta(3, 5);
-    graf.adcAresta(3, 6);
-    graf.adcAresta(3, 7); 
-    graf.adcAresta(3, 8);
-    graf.adcAresta(3, 9);
-    graf.adcAresta(3, 4);//29
-
-    graf.adcAresta(4, 5);
-    graf.adcAresta(4, 6);
-    graf.adcAresta(4, 7); 
-    graf.adcAresta(4, 8);
-    graf.adcAresta(4, 9);//34
-
-    graf.adcAresta(5, 9);
-    graf.adcAresta(5, 6);//36
-
-    graf.adcAresta(6, 9);
-    graf.adcAresta(6, 7);
-    graf.adcAresta(7, 8);
-    graf.adcAresta(8, 9);
-
-  }
-  
-    static void Main()
-    {
-        Grafo graf = new Grafo(10);
-         preencherEsparso(graf);
-        graf.ColorirGrafo();
-      
+        }
     }
 }
