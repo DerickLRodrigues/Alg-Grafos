@@ -1,0 +1,15 @@
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.csproj.AssemblyReference.cache
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.AssemblyInfoInputs.cache
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.AssemblyInfo.cs
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.csproj.CoreCompileInputs.cache
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\bin\Debug\net7.0\BellmanFord.exe
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\bin\Debug\net7.0\BellmanFord.deps.json
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\bin\Debug\net7.0\BellmanFord.runtimeconfig.json
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\bin\Debug\net7.0\BellmanFord.dll
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\bin\Debug\net7.0\BellmanFord.pdb
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.dll
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\refint\BellmanFord.dll
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.pdb
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\BellmanFord.genruntimeconfig.cache
+C:\Users\Notebook\OneDrive\Área de Trabalho\Grafos\Alg-Grafos\BellmanFord\obj\Debug\net7.0\ref\BellmanFord.dll
